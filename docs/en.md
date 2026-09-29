@@ -1,38 +1,27 @@
-# Demo Devices Template
+# Server API — Configuration
 
-This is the user documentation of the integration. Gladys re-hosts this file
-and shows a permanent **Documentation** link to it in the Configuration screen
-(in the user's language, with English as the fallback) — it is when
-configuring that the user needs it most. Keep the short onboarding hints in
-the `section` blocks of the manifest `config_schema`; put the long
-step-by-step (screenshots, troubleshooting…) here.
+## Exposed Features
 
-## What you get
+| ------------------------------ | ----------------------------- |
+| Feature | Description |
+| ------------------------------ | ----------------------------- |
+| / | Welcome message (test) |
+| /backup | Database backups |
+| /gsm/<text> | Send a 4G GSM SMS | project |
+| /script/<script_name> | Run a script | project |
+| ------------------------------ | ----------------------------- |
 
-Six demo devices show up after installation: a weather station (real data
-from Open-Meteo), a switch, a dimmable light, a smart plug with power
-metering, a motion sensor and a camera.
+## Widgets, Triggers, and Scene Actions (Gladys 5.1)
 
-## Configuration
+These functions require Gladys **5.1.0** or newer.
 
-1. Open the **Configuration** tab of the integration.
-2. Set the **latitude** and **longitude** the demo weather station should
-   observe (they default to Paris), and pick your temperature unit.
-3. Save: the devices appear in the **Discovery** tab, ready to be added.
+### Dashboard Widgets
 
-The **Prefer the local connection** toggle drives the demo plug: it reports
-the channel it actually uses as a badge (local or cloud), with an orange dot
-when it runs degraded (local refused, cloud fallback).
+In progress
 
-## Actions
 
-- **Test the weather provider** — performs a live request to Open-Meteo and
-  shows the current temperature and humidity under the button.
-- **Identify a device** — pick one of your devices in the list and it will
-  signal itself (the demo light "blinks" in the logs).
+### Scene Actions
 
-## Troubleshooting
+To check the server, run a test by calling the API server: http://localhost:3002.
 
-The integration logs everything it does: check the integration logs from the
-Gladys UI (or `docker logs` on the host) with `LOG_LEVEL=debug` for the full
-detail.
+To perform a backup, enter the command http://localhost:3002/backup
