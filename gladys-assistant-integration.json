@@ -1,6 +1,6 @@
 {
   "manifest_version": 1,
-  "type": "device",
+  "type": "provider",
   "name": "serveur api",
   "description": {
     "en": "Link Gladys with a nodejs server: works with HTTP API...",
