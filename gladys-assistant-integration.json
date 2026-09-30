@@ -12,30 +12,6 @@
   "cover_image": "https://raw.githubusercontent.com/mgrafr/serveur-api/main/cover.jpg",
   "categories": ["services", "network"],
   "transports": ["local"],
-    "containers": [
-    {
-      "name": "server-api",
-      "docker_image": "hub.docker.com/repository/docker/mgrafr/server-api:v2",
-      "start": "auto",
-      "read_only": false,
-      "memory_mb": 512,
-      "cpu": 1,
-      "volumes": [
-        "/data"
-      ],
-      "ports": [
-        {
-          "container_port": 3002,
-          "name": "michel",
-          "label": {
-            "en": "server-api admin portal",
-            "fr": "Portail d'administration server-api"
-          },
-          "browsable": true
-        }
-      ]
-    }
-  ],
   "config_schema": [
    {
       "key": "intro",
