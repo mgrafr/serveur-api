@@ -26,8 +26,8 @@ import {
 } from './src/devices/index.js';
 
 const gladys = new GladysIntegration();
-const CONTAINER_NAME = 'server-api';
-const ADMIN_CONTAINER_PORT = 3002;
+// const CONTAINER_NAME = 'server-api';
+// const ADMIN_CONTAINER_PORT = 3002;
 
 // Current configuration (hot-reloaded via onConfigUpdated).
 let config = normalizeConfig();
