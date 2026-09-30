@@ -15,7 +15,7 @@
     "containers": [
     {
       "name": "server-api",
-      "docker_image": "https://hub.docker.com/repository/docker/mgrafr/server-api:v2",
+      "docker_image": "hub.docker.com/repository/docker/mgrafr/server-api:v2",
       "start": "auto",
       "read_only": false,
       "memory_mb": 512,
@@ -32,24 +32,6 @@
             "fr": "Portail d'administration server-api"
           },
           "browsable": true
-        },
-        {
-          "container_port": 80,
-          "name": "http",
-          "label": {
-            "en": "HTTP traffic",
-            "fr": "Trafic HTTP"
-          },
-          "browsable": false
-        },
-        {
-          "container_port": 443,
-          "name": "https",
-          "label": {
-            "en": "HTTPS traffic",
-            "fr": "Trafic HTTPS"
-          },
-          "browsable": false
         }
       ]
     }
