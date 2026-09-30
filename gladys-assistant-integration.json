@@ -1,17 +1,59 @@
 {
   "manifest_version": 1,
-  "type": "provider",
-  "name": "serveur api",
+  "type": "device",
+  "name": "server api",
   "description": {
     "en": "Link Gladys with a nodejs server: works with HTTP API...",
     "fr": "Reliez Gladys à un serveur nodejs :fonctionne avec http api ..."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/mgrafr/serveur-api:1.0.0",
+  "docker_image": "ghcr.io/mgrafr/GladysAssistantZ-server-api:1.0.0",
   "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/mgrafr/serveUr-api/main/cover.jpg",
+  "cover_image": "https://raw.githubusercontent.com/mgrafr/gladys-server-api/main/cover.jpg",
   "categories": ["services", "network"],
   "transports": ["local"],
+    "containers": [
+    {
+      "name": "server-api",
+      "docker_image": "https://hub.docker.com/repository/docker/mgrafr/gladys-server-api:v1",
+      "start": "auto",
+      "read_only": false,
+      "memory_mb": 512,
+      "cpu": 1,
+      "volumes": [
+        "/data"
+      ],
+      "ports": [
+        {
+          "container_port": 3002,
+          "name": "michel",
+          "label": {
+            "en": "server-api admin portal",
+            "fr": "Portail d'administration server-api"
+          },
+          "browsable": true
+        },
+        {
+          "container_port": 80,
+          "name": "http",
+          "label": {
+            "en": "HTTP traffic",
+            "fr": "Trafic HTTP"
+          },
+          "browsable": false
+        },
+        {
+          "container_port": 443,
+          "name": "https",
+          "label": {
+            "en": "HTTPS traffic",
+            "fr": "Trafic HTTPS"
+          },
+          "browsable": false
+        }
+      ]
+    }
+  ],
   "config_schema": [
    {
       "key": "intro",
