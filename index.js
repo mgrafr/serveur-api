@@ -26,6 +26,8 @@ import {
 } from './src/devices/index.js';
 
 const gladys = new GladysIntegration();
+const CONTAINER_NAME = 'serer-api';
+const ADMIN_CONTAINER_PORT = 3002;
 
 // Current configuration (hot-reloaded via onConfigUpdated).
 let config = normalizeConfig();
