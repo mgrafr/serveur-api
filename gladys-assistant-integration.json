@@ -15,7 +15,7 @@
     "containers": [
     {
       "name": "server-api",
-      "docker_image": "https://hub.docker.com/repository/docker/mgrafr/gladys-server-api:v1",
+      "docker_image": "https://hub.docker.com/repository/docker/mgrafr/server-api:v2",
       "start": "auto",
       "read_only": false,
       "memory_mb": 512,
