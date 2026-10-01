@@ -1,6 +1,13 @@
 // -----------------------------------------------------------------------------
 // Entry point of the Gladys serveur-api integration.
 //
+// Cette intégration INSTALLE ET EXÉCUTE Serveur-Api :
+
+// le manifeste déclare l'image officielle `server-api` comme un sous-conteneur
+// (l'équivalent docker-compose, traduit pour le sandbox Gladys), avec son
+// volume de données et son port. Gladys crée et supervise le conteneur (`start: "auto"`),
+// assigne le port de l'hôte, et affiche un lien pour accéder à la reonse de conteneur
+
 // Role of this file: wire the SDK to the device catalog (src/devices/). It holds
 // NO hardware logic: all the control "work" lives in the device modules. This
 // file only:
@@ -26,8 +33,9 @@ import {
 } from './src/devices/index.js';
 
 const gladys = new GladysIntegration();
-// const CONTAINER_NAME = 'server-api';
-// const ADMIN_CONTAINER_PORT = 3002;
+const CONTAINER_NAME = 'server-api';
+const ADMIN_CONTAINER_PORT = 3002;
+
 
 // Current configuration (hot-reloaded via onConfigUpdated).
 let config = normalizeConfig();
