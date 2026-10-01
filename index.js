@@ -46,8 +46,8 @@ let pushCleanups = [];
 
 // --- Discovery: Gladys asks for the list of devices --------------------------
 gladys.onScanRequest(async () => {
-  logger.info('onScanRequest -> publishing discovered devices');
-  await gladys.publishDiscoveredDevices(buildDiscoveredDevices(gladys, config));
+  logger.info('onScanRequest -> no device to publish (container-only integration)');
+  await gladys.publishDiscoveredDevices([]);
 });
 
 // --- Command: the user acts on a controllable feature ------------------------
