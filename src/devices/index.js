@@ -23,12 +23,11 @@
 
 
 import { switchDevice } from './switchDevice.js';
-import { light } from './light.js';
 
 
 
 
-export const DEVICE_BLUEPRINTS = [switchDevice, light];
+export const DEVICE_BLUEPRINTS = [switchDevice];
 
 /**
  * Build the discovery payload for Gladys (all devices).
