@@ -32,7 +32,9 @@
             "fr": "Portail d'administration SERVER API"
           },
           "browsable": true
-        }
+    }
+      ]
+    }
   ],
   "config_schema": [
    {
