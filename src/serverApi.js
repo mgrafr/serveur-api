@@ -20,7 +20,7 @@ const REQUEST_TIMEOUT_MS = 5_000;
  * @param {string} [baseUrl]
  * @returns {Promise<{ status: string, version?: { major: number, minor: number, revision: number } }>}
  */
-export async function getNpmHealth(baseUrl = NPM_INTERNAL_URL) {
+export async function getServerHealth(baseUrl = SERVERAPI_INTERNAL_URL) {
   const response = await fetch(`${baseUrl}/`, {
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
   });
@@ -47,13 +47,13 @@ export function describeFetchError(err) {
 /**
  * Wait until the NPM container answers on its API, trying every candidate
  * base URL on each round (the private DNS alias first, then the host-published
- * port as a fallback). The first start can be long on modest hardware: NPM
+ * port as a fallback). The first start can be long on modest hardware: SERVERAPI
  * runs its database migrations and generates a default certificate before
  * listening.
  * @param {{ candidates?: string[], timeoutMs?: number, intervalMs?: number }} [options]
  * @returns {Promise<{ health: object, baseUrl: string }>} the first healthy answer and the URL that gave it
  */
-export async function waitForNpm({
+export async function waitForServer({
   candidates = [SERVERAPI_INTERNAL_URL],
   timeoutMs = 300_000,
   intervalMs = 5_000,
@@ -64,7 +64,7 @@ export async function waitForNpm({
   for (;;) {
     for (const baseUrl of candidates) {
       try {
-        const health = await getNpmHealth(baseUrl);
+        const health = await getServerHealth(baseUrl);
         return { health, baseUrl };
       } catch (err) {
         failures.set(baseUrl, describeFetchError(err));
