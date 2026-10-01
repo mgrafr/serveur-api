@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// Entry point of the Gladys external integration.
+// Entry point of the Gladys serveur-api integration.
 //
 // Role of this file: wire the SDK to the device catalog (src/devices/). It holds
 // NO hardware logic: all the control "work" lives in the device modules. This
@@ -50,19 +50,6 @@ gladys.onSetValue(async (device, feature, value) => {
     throw new Error(`No command handler for ${device.external_id}`);
   }
   await blueprint.onSetValue(gladys, { device, feature, value, config });
-});
-
-// --- Camera: Gladys needs a FRESH image of a camera device -------------------
-// Triggered by the dashboard live view or a chat intent. The resolved
-// `image/jpg;base64,...` string (≤ 150 KB) is acked back to Gladys; the ack is
-// awaited under 15 s (not the usual 5 s), so a real capture fits.
-gladys.onGetImage(async (device) => {
-  logger.info(`onGetImage <- ${device.external_id}`);
-  const blueprint = findBlueprintByDevice(gladys, device);
-  if (!blueprint || typeof blueprint.onGetImage !== 'function') {
-    throw new Error(`No camera handler for ${device.external_id}`);
-  }
-  return blueprint.onGetImage(gladys, { device, config });
 });
 
 // --- Polling: Gladys asks to refresh a device --------------------------------
