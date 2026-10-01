@@ -37,6 +37,9 @@ const gladys = new GladysIntegration();
 const CONTAINER_NAME = 'server-api';
 const ADMIN_CONTAINER_PORT = 3002;
 
+await gladys.startContainer("server-api", { env: { SERVERAPI_PASSWORD: password } });
+const containers = await gladys.getContainers();
+const ServerApi = containers.find((c) => c.name === "server-api");
 
 // Current configuration (hot-reloaded via onConfigUpdated).
 let config = normalizeConfig();
