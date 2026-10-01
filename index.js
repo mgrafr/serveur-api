@@ -24,6 +24,7 @@
 
 import { GladysIntegration, logger } from '@gladysassistant/integration-sdk';
 import { normalizeConfig } from './src/config.js';
+import { getNpmHealth, waitForNpm, formatVersion, SERVERAPI_INTERNAL_URL } from './src/serverApi.js';
 import {
   DEVICE_BLUEPRINTS,
   buildDiscoveredDevices,
