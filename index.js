@@ -47,6 +47,11 @@ let config = normalizeConfig();
 // Cleanup functions for the "push" subscriptions (e.g. the motion sensor).
 let pushCleanups = [];
 
+// The base URL that last answered: the private DNS alias (http://npm:81)
+// or, as a fallback, the admin port published on the host.
+let serverBaseUrl = NPM_INTERNAL_URL;
+
+
 // --- Manifest action: "test connexion to server-api" button ---------------------
 gladys.onAction('test_connection', async () => {
   logger.info(`Action test_connection -> live request to the SERVER API (${ServerBaseUrl})`);
