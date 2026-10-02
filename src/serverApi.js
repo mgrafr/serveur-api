@@ -11,7 +11,7 @@ import { createLogger } from '@gladysassistant/integration-sdk';
 const logger = createLogger({ name: 'serverapi' });
 
 // Overridable for local runs/tests outside the Gladys network.
-export const SERVERAPI_INTERNAL_URL = process.env.SERVERAPI_BASE_URL ?? 'http://npm:81';
+export const SERVERAPI_INTERNAL_URL = process.env.SERVERAPI_BASE_URL ?? 'http://localhost:3002';
 
 const REQUEST_TIMEOUT_MS = 5_000;
 
