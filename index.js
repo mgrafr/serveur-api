@@ -49,7 +49,7 @@ let pushCleanups = [];
 
 // The base URL that last answered: the private DNS alias (http://npm:81)
 // or, as a fallback, the admin port published on the host.
-let serverBaseUrl = SERVERAPI_INTERNAL_URL;
+let ServerBaseUrl = SERVERAPI_INTERNAL_URL;
 
 
 // --- Manifest action: "test connexion to server-api" button ---------------------
