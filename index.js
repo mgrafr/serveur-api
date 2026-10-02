@@ -24,7 +24,7 @@
 
 import { GladysIntegration, logger } from '@gladysassistant/integration-sdk';
 import { normalizeConfig } from './src/config.js';
-// import { getServerHealth, waitForServer, formatVersion, SERVERAPI_INTERNAL_URL } from './src/serverApi.js';
+import { getServerHealth, waitForServer, formatVersion, SERVERAPI_INTERNAL_URL } from './src/serverApi.js';
 import {
   DEVICE_BLUEPRINTS,
   buildDiscoveredDevices,
@@ -46,6 +46,18 @@ let config = normalizeConfig();
 
 // Cleanup functions for the "push" subscriptions (e.g. the motion sensor).
 let pushCleanups = [];
+
+// --- Manifest action: "test connexion to server-api" button ---------------------
+gladys.onAction('test_connection', async () => {
+  logger.info(`Action test_connection -> live request to the SERVER API (${ServerBaseUrl})`);
+  const health = await getServerHealthServerBaseUrl);
+  const version = formatVersion(health);
+  return {
+    en: `Server-api v${version} is up and running.`,
+    fr: `Server-api v${version} est démarré et fonctionne.`,
+  };
+});
+
 
 // --- Discovery: Gladys asks for the list of devices --------------------------
 gladys.onScanRequest(async () => {
