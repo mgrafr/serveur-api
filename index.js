@@ -50,7 +50,7 @@ let pushCleanups = [];
 // --- Manifest action: "test connexion to server-api" button ---------------------
 gladys.onAction('test_connection', async () => {
   logger.info(`Action test_connection -> live request to the SERVER API (${ServerBaseUrl})`);
-  const health = await getServerHealthServerBaseUrl);
+  const health = await getServerHealth(ServerBaseUrl);
   const version = formatVersion(health);
   return {
     en: `Server-api v${version} is up and running.`,
