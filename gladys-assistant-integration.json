@@ -46,8 +46,8 @@
       "key": "access_pass",
       "type": "secret",
       "label": {
-        "en": "server-api API key",
-        "fr": "Clé d'API server-api"
+        "en": "server-api API password",
+        "fr": "Mot de passe d'API server-api"
       },
       "description": {
         "en": "The API key ",
