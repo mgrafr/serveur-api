@@ -28,6 +28,34 @@
       ]
     }
   ],
+  "contact_schema": [
+    {
+      "key": "username",
+      "type": "string",
+      "label": {
+        "en": "SERVER-API identifier",
+        "fr": "Identifiant SERVER-API"
+      },
+      "description": {
+        "en": "Your server-api account identifier (the 8-digit login ).",
+        "fr": "Votre identifiant server-api (un login à 8 chiffes ou caractères)."
+      },
+      "required": true
+    },
+    {
+      "key": "access_pass,
+      "type": "secret",
+      "label": {
+        "en": "server-api API key",
+        "fr": "Clé d'API server-api"
+      },
+      "description": {
+        "en": "The API key ",
+        "fr": "La clé d'API."
+      },
+      "required": true
+    }
+  ],
   "config_schema": [
    {
       "key": "intro",
@@ -53,24 +81,7 @@
         "fr": "Par exemple : http://localhost:3002/backup"
       },
      "required": true
-    },
-     {
-      "key": "username",
-      "type": "string",
-      "label": {
-        "en": "Username",
-        "fr": "Utilisateur"
-      },
-      "required": true
-    },
-    {
-      "key": "password",
-      "type": "secret",
-      "label": {
-        "en": "Password",
-        "fr": "Mot de passe"
-      }
-    }
+    }    
   ],
      "actions": [
     {
