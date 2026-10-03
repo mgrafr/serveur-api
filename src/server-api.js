@@ -11,7 +11,7 @@
 // (no SDK, no Gladys concept) so it stays trivially unit-testable.
 // -----------------------------------------------------------------------------
 
-const SERVER-API_SEND_URL = 'http://localhost/';
+const SERVER-API_SEND_URL = 'http://gladys/';
 const REQUEST_TIMEOUT_MS = 10 * 1000;
 
 // The API caps the message length; keep it explicit so we fail with a clear
