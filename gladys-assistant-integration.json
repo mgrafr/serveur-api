@@ -28,7 +28,7 @@
       ]
     }
   ],
-  "contact_schema": [
+  "config_schema": [
     {
       "key": "username",
       "type": "string",
@@ -54,9 +54,7 @@
         "fr": "La clé d'API."
       },
       "required": true
-    }
-  ],
-  "config_schema": [
+    },
    {
       "key": "intro",
       "type": "section",
