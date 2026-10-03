@@ -52,24 +52,24 @@ function describeError(status) {
  * @param {typeof fetch} [options.fetchImpl] - fetch implementation (for tests).
  * @returns {Promise<void>} Resolves when the demand was accepted by the API.
  * @example
- * await sendUrl({ username: '12345678', accessToken: 'abcd' }, 'Hello from Gladys!');
+ * await sendUrl({ username: '12345678', accesspass: 'abcd' }, 'Hello from Gladys!');
  */
-async function sendUrl({ username, accessToken }, text, { fetchImpl = fetch } = {}) {
-  if (!username || !accessToken) {
+async function sendUrl({ username, accesspass },{ fetchImpl = fetch } = {}) {
+  if (!username || !accesspass) {
     throw new Error(
       'Server-api credentials are missing (username and access_token are both required)',
     );
   }
-  if (typeof text !== 'string' || text.length === 0) {
-    throw new Error(' text must be a non-empty string');
-  }
+  // if (typeof text !== 'string' || text.length === 0) {
+  //  throw new Error(' text must be a non-empty string');
+  // }
   // if (text.length > MAX_SMS_LENGTH) {
     // throw new Error(`message text is too long (max ${MAX_SMS_LENGTH} characters)`);
   // }
 
   const url = new URL(SERVER-API_SEND_URL);
   url.searchParams.set('user', username);
-  url.searchParams.set('pass', accessToken);
+  url.searchParams.set('pass', accesspass;
   // url.searchParams.set('msg', text);
 
   const controller = new AbortController();
