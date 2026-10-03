@@ -1,93 +1,45 @@
 // -----------------------------------------------------------------------------
-// Free Mobile SMS API client.
+// Server api REST client.
 //
-// Free Mobile exposes a single outgoing webhook to send an SMS to YOUR OWN
-// number (the number of the account the credentials belong to):
-//
-//   GET https://smsapi.free-mobile.fr/sendmsg?user=<id>&pass=<key>&msg=<text>
-//
-// It is strictly outbound: there is no inbound channel, no delivery receipt,
-// no way to send to an arbitrary number. This module holds ONLY that HTTP call
-// (no SDK, no Gladys concept) so it stays trivially unit-testable.
+// Two endpoints are all this integration needs:
+//   - GET   /backup
+//      
 // -----------------------------------------------------------------------------
 
-const SERVER-API_SEND_URL = 'http://localhost:3002/';
-const REQUEST_TIMEOUT_MS = 10 * 1000;
+import { createLogger } from '@gladysassistant/integration-sdk';
+// import { isExpired, refreshTokens } from './oauth.js';
 
-// The API caps the message length; keep it explicit so we fail with a clear
-// message instead of a raw HTTP 400.
-// const MAX_SMS_LENGTH = 999;
+const logger = createLogger({ name: 'server-api' });
 
-/**
- * @description Map a Free Mobile HTTP status to a human-readable reason.
- * The API documents these codes on the SMS notifications page.
- * @param {number} status - HTTP status returned by the Free Mobile API.
- * @returns {string} A human-readable reason.
- * @example
- * describeError(403); // -> 'access denied (wrong identifier/key, or service not enabled)'
- */
-function describeError(status) {
-  switch (status) {
-    case 400:
-      return 'missing parameter (empty message?)';
-    case 402:
-      return 'too many SMS sent, please slow down';
-    case 403:
-      return 'access denied (wrong identifier/key, or service not enabled)';
-    case 500:
-      return 'Free Mobile server error, please retry later';
-    default:
-      return `unexpected HTTP status ${status}`;
+export const SERVERAPI_URL = 'http://localhost:3002/';
+
+const REQUEST_TIMEOUT_MS = 20_000;
+
+/** Error carrying the HTTP status, so callers can tell a quota from a bug. */
+export class ServerApiError extends Error {
+  /**
+   * @param {number} status the HTTP status returned by the Daikin cloud
+   * @param {string} message the human readable reason
+   */
+  constructor(status, message) {
+    //super(message);
+    this.name = 'ServerApiError';
+    this.status = status;
+    /** The daily/minute quota is spent: retrying now only makes it worse. */
+    this.isRateLimited = status === 429;
+    /** The session is dead beyond a refresh: the user must reconnect. */
+    this.isAuthError = status === 401 || status === 403;
   }
 }
 
-/**
- * @description Send an SMS through the Free Mobile API to the account owner's
- * own phone number.
- * @param {object} credentials - credentials.
- * @param {string} credentials.username - identifier.
- * @param {string} credentials.access.pass - API key.
- * @param {string} text - The message body (1..MAX_SMS_LENGTH characters).
- * @param {object} [options] - Options.
- * @param {typeof fetch} [options.fetchImpl] - fetch implementation (for tests).
- * @returns {Promise<void>} Resolves when the demand was accepted by the API.
- * @example
- * await sendUrl({ username: '12345678', accesspass: 'abcd' }, 'Hello from Gladys!');
- */
-async function sendUrl({ username, accesspass },{ fetchImpl = fetch } = {}) {
-  if (!username || !accesspass) {
-    throw new Error(
-      'Server-api credentials are missing (username and access_token are both required)',
-    );
+export class ServerApi {
+ 
+  /**
+   *.
+   * 
+   */
+  async getServer() {
+    const respose = await this.request('GET', '/');
+     return response ;
   }
-  // if (typeof text !== 'string' || text.length === 0) {
-  //  throw new Error(' text must be a non-empty string');
-  // }
-  // if (text.length > MAX_SMS_LENGTH) {
-    // throw new Error(`message text is too long (max ${MAX_SMS_LENGTH} characters)`);
-  // }
-
-  const url = new URL(SERVER-API_SEND_URL);
-  url.searchParams.set('user', username);
-  url.searchParams.set('pass', accesspass;
-  // url.searchParams.set('msg', text);
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  try {
-    const response = await fetchImpl(url, { method: 'GET', signal: controller.signal });
-    if (!response.ok) {
-      // Never surface the URL/credentials in the thrown error.
-      throw new Error(`SERVER-API rejected the SMS: ${describeError(response.status)}`);
-    }
-  } catch (err) {
-    if (err.name === 'AbortError') {
-      throw new Error('SERVER-API timed out', { cause: err });
-    }
-    throw err;
-  } finally {
-    clearTimeout(timeout);
   }
-}
-
-export { sendUrl, describeError, SERVER-API_SEND_URL};
