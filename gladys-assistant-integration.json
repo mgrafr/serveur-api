@@ -43,7 +43,7 @@
       "required": true
     },
     {
-      "key": "access_pass",
+      "key": "accesspass",
       "type": "secret",
       "label": {
         "en": "server-api API password",
